@@ -5,6 +5,12 @@ The backend is powered by Node.js/Express with MongoDB for data storage, and the
 
 ---
 
+## 🌐 Live Demo
+
+🎯 **Visit the app:** [https://plant-disease-web-gfm9.onrender.com/](https://plant-disease-web-gfm9.onrender.com/)
+
+---
+
 ## 🚀 Features
 
 - 🧠 **ML‑powered disease detection** – classify plant leaf images with a pre‑trained PyTorch model (`plant-disease-model-complete.pth`)
