@@ -1,0 +1,38 @@
+services:
+  - type: web
+    name: plant-disease-web
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: MONGODB_URL
+        sync: false
+      - key: TOKEN_KEY
+        sync: false
+      - key: SECRET
+        sync: false
+      - key: GEMINI_KEY
+        sync: false
+      - key: CLOUD_NAME
+        sync: false
+      - key: CLOUD_API_KEY
+        sync: false
+      - key: CLOUD_API_SECRET
+        sync: false
+      - key: DETECTION_APP_URL
+        sync: false
+
+  - type: web
+    name: plant-disease-streamlit
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run cure.py --server.port=$PORT --server.address=0.0.0.0 --browser.gatherUsageStats=false
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.11
+      - key: GEMINI_KEY
+        sync: false

@@ -2,11 +2,13 @@
   "name": "plant-disease-detection",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run streamlit\"",
+    "start": "node app.js",
+    "dev": "concurrently \"npm run server\" \"npm run streamlit\"",
     "server": "nodemon app.js",
     "streamlit": "streamlit run cure.py --browser.gatherUsageStats=false --server.headless=true --server.port=8501",
+    "streamlit:render": "streamlit run cure.py --browser.gatherUsageStats=false --server.headless=true --server.address=0.0.0.0 --server.port=$PORT",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

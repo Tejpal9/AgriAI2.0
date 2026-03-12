@@ -13,6 +13,10 @@ const flash = require("connect-flash");
 const TimeAgo = require("javascript-time-ago");
 
 const app = express();
+const port = process.env.PORT || 8090;
+const detectionAppUrl = process.env.DETECTION_APP_URL || "http://localhost:8501";
+
+app.set("trust proxy", 1);
 require("./config/passport");
 
 const authRoutes = require("./routes/auth.js");
@@ -55,7 +59,7 @@ const store = MongoStore.create({
   touchAfter: 24 * 3600,
 });
 
-store.on("error", () => {
+store.on("error", (err) => {
   console.log("ERROR IN MONGO SESSION STORE", err);
 });
 
@@ -82,6 +86,7 @@ app.use(async (req, res, next) => {
     res.locals.login = req.isAuthenticated();
     res.locals.session = req.session;
     res.locals.currentUser = req.user;
+    res.locals.detectionAppUrl = detectionAppUrl;
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
     next();
@@ -154,7 +159,6 @@ app.use("/", weatherRoute);
 app.use("/fertilizer", firtilizerRoute);
 
 
-app.listen(8090, () => {
-  console.log("server is listening to port 8090");
+app.listen(port, () => {
+  console.log(`server is listening to port ${port}`);
 });
-
