@@ -1,0 +1,406 @@
+:root {
+  /*=== Colord ===*/
+  --body-color: #e4f7ee; /*#e4e9f7*/
+  --sidebar-color: #fff;
+  --primary-color: #008080;
+  --primary-color-light: #f6f5ff;
+  --toggle-color: #ddd;
+  --text-color: #707070;
+
+  /*=== Transition ===*/
+  --tran-02: all 0.2s ease;
+  --tran-03: all 0.3s ease;
+  --tran-04: all 0.4s ease;
+  --tran-05: all 0.5s ease;
+}
+
+body.dark {
+  /*=== Colord ===*/
+  --body-color: #18191a;
+  --sidebar-color: #242526;
+  --primary-color: #3a3b3c;
+  --primary-color-light: #3a3b3c;
+  --toggle-color: #fff;
+  --text-color: #ccc;
+}
+
+.background-image {
+  /* position: absolute; */
+  background-repeat: no-repeat;
+  background-position: center center;
+  /* background-attachment: fixed; */
+  background-size: cover;
+}
+
+.new-img {
+  position: fixed;
+  right: -5rem;
+  bottom: -3rem;
+  height: 45rem;
+  transform: rotate(-26deg);
+  opacity: 0.8;
+}
+
+.outer-ulpoder {
+  display: flex;
+  justify-content: center;
+}
+
+/* .uploader{
+    width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+} */
+
+.uploader + label {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: var(--primary-color);
+  /* background-color: black; */
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* .uploader:focus + label,
+.uploader + label:hover {
+    background-color: red;
+} */
+
+.plant-img-upload {
+  /* border: 1px solid burlywood; */
+  width: 30%;
+  margin: 2rem;
+  margin-left: -2rem;
+}
+
+.uploaded-div {
+  border: 1px dashed black;
+  border-radius: 12px;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20rem;
+  padding: 2rem 1rem;
+}
+
+.detection-upload-img {
+  width: 10rem;
+  margin-top: -2rem;
+}
+
+.uploaded-div .browse-btn {
+  padding: 8px 16px;
+  min-width: 150px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background-color: var(--primary-color);
+  border: 2px solid teal;
+  border-radius: 50px;
+  transition: 0.3s;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+.uploaded-div .browse-btn:hover {
+  background-color: teal;
+  box-shadow: 0px 4px 8px rgb(1 179 179 / 48%);
+}
+
+.preview {
+  z-index: 1;
+  width: 19rem;
+  margin: 1rem;
+  margin-left: 5rem;
+  margin-top: -3rem;
+  /* border: 1px dashed black; */
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-preview {
+  border: 1px dashed black;
+  width: 100%;
+  height: 17rem;
+  border-radius: 16px;
+}
+
+.preview #output {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  border: none;
+}
+
+.preview #preview-text {
+  font-size: 22px;
+  color: teal;
+  font-weight: 600;
+  margin: 1rem;
+}
+
+.predict-btn {
+  position: absolute;
+  padding: 10px 20px;
+  min-width: 180px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background-color: rgb(2, 89, 155);
+  border: 2px solid rgb(2, 89, 155);
+  border-radius: 12px;
+  transition: 0.3s;
+  text-align: center;
+  margin: 3rem 1rem;
+  left: 41%;
+}
+
+.predict-btn:hover {
+  box-shadow: 0px 4px 8px rgba(1, 118, 220, 0.48);
+}
+
+/* Fertillizer Page */
+
+#fertilizerForm {
+  display: flex;
+  width: 45%;
+  margin: 4rem 6rem;
+  justify-content: space-evenly;
+}
+
+#fertilizerForm .each-col {
+  display: flex;
+  flex-direction: column;
+}
+
+#fertilizerForm input {
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  margin-top: 0.8rem;
+  width: 15rem;
+  outline: none;
+  border: 1px solid rgb(224, 223, 223);
+  margin-bottom: 1rem;
+  color: var(--text-color);
+  background: var(--primary-color-light);
+}
+
+#fertilizerForm label {
+  font-size: 15px;
+  margin-bottom: -0.4rem;
+  margin-left: 0.4rem;
+  font-family: "Montserrat", sans-serif;
+}
+
+#fertilizerForm .recommenBtn {
+  position: absolute;
+  width: 15rem;
+  bottom: 40%;
+  /* margin-left: 2rem; */
+  padding: 0.8rem 0;
+  border-radius: 16px;
+  border: none;
+  background-color: teal;
+  color: #fff;
+}
+
+.soil-data {
+  font-size: 16px;
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-left: 1.8rem;
+  position: absolute;
+  top: 15%;
+}
+
+#result-div {
+  margin-top: 5rem;
+  /* border: 1px solid black; */
+  margin: 6rem 8rem;
+  font-size: 24px;
+  color: var(--primary-color);
+  display: flex;
+}
+
+#result-div span {
+  margin-right: 2rem;
+  font-family: "Open Sans", sans-serif;
+}
+
+body.dark #result-div {
+  color: var(--text-color);
+}
+
+body.dark #fertilizerForm label {
+  color: var(--text-color);
+}
+
+body.dark #fertilizerForm input {
+  background: var(--primary-color-light);
+  border: none;
+  color: var(--toggle-color);
+  outline: none;
+}
+
+body.dark #fertilizerForm .recommenBtn {
+  color: var(--toggle-color);
+  border: 1px solid var(--primary-color);
+  background: none;
+}
+
+body.dark #fertilizerForm .recommenBtn:hover {
+  background: var(--primary-color);
+}
+
+body.dark .soil-data {
+  color: var(--toggle-color);
+}
+/* Weather Page */
+
+.heading-weather {
+  color: var(--primary-color);
+  margin: 1rem 5rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+body.dark .heading-weather {
+  color: var(--text-color);
+}
+
+.fertilize-img {
+  position: fixed;
+  transform: rotate(180deg);
+  height: 100%;
+  right: 0;
+}
+
+.pooted-tree {
+  position: fixed;
+  width: 6rem;
+  bottom: 0;
+  margin: 1rem;
+}
+
+.weather-form {
+  /* border: 1px solid black; */
+  max-width: 60rem;
+  margin-left: 5rem;
+}
+
+.weather-form input {
+  outline: none;
+  border: 1px solid rgb(224, 223, 223);
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  background: var(--primary-color-light);
+  transition: var(--tran-05);
+  color: var(--text-color);
+}
+
+body.dark .weather-form input {
+  background: var(--primary-color-light);
+  border: none;
+  color: var(--toggle-color);
+  outline: none;
+}
+
+.weather-form button {
+  padding: 0.6rem 2rem;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--primary-color);
+  color: #fff;
+  margin-left: 1.5rem;
+}
+
+body.dark .weather-form button {
+  color: var(--toggle-color);
+  border: 1px solid var(--primary-color);
+  background: none;
+}
+
+body.dark .weather-form button:hover {
+  background: var(--primary-color);
+}
+
+#OutPut-data {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border: 1px dashed var(--primary-color);
+  border-radius: 8px;
+  background-color: var(--primary-color-light);
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 2rem 15rem;
+}
+
+#OutPut-data div {
+  margin-top: 1rem;
+}
+
+#OutPut-data p {
+  font-size: 20px;
+  color: var(--primary-color);
+  /* font-family: 'Roboto', sans-serif; */
+}
+
+#OutPut-data ul {
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+}
+#OutPut-data ul li {
+  margin: 0.6rem 0.5rem;
+}
+
+body.dark #OutPut-data {
+  color: var(--text-color);
+}
+
+body.dark #OutPut-data p {
+  color: var(--text-color);
+  /* font-family: 'Roboto', sans-serif; */
+}
+
+#user-input {
+  /* width: 50rem; */
+  display: flex;
+  justify-content: center;
+  /* border: 1px solid black; */
+  margin: 1rem 15rem;
+}
+
+#user-input input {
+  outline: none;
+  border: 1px solid rgb(224, 223, 223);
+  padding: 1rem;
+  border-radius: 6px;
+  width: 100%;
+  background: var(--primary-color-light);
+  transition: var(--tran-05);
+  color: var(--text-color);
+}
+
+#user-input button {
+  padding: 0.6rem 2rem;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--primary-color);
+  color: #fff;
+  margin-left: 1.5rem;
+}
+
+.outputdiv {
+  margin: 1rem 20rem;
+}

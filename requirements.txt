@@ -1,0 +1,6 @@
+streamlit
+tensorflow
+google-generativeai
+dotenv
+torch 
+torchvision

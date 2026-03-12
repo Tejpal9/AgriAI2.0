@@ -1,0 +1,297 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  /* --- Page Layout --- */
+  .weather-section {
+    width: 95%;
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .community-head .text {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: teal;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .heading-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2.5rem;
+    font-size: 1.2rem;
+  }
+
+  /* --- Form Styling --- */
+  .weather-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .weather-form input {
+    flex: 1; /* Stretch to fill space */
+    padding: 16px 24px;
+    border: 2px solid #e0e0e0;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+
+  .weather-form input:focus {
+    border-color: teal;
+    box-shadow: 0 6px 15px rgba(0,128,128,0.15);
+    transform: translateY(-1px);
+  }
+
+  .weather-form button {
+    flex-shrink: 0;
+    padding: 16px 36px;
+    background-color: teal;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,128,128,0.2);
+  }
+
+  .weather-form button:hover {
+    background-color: #006d6d;
+    transform: translateY(-2px);
+  }
+
+  .weather-form button:disabled,
+  .weather-form input:disabled {
+    background-color: #f5f5f5;
+    color: #aaa;
+    border-color: #eee;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* --- Output Box Styling --- */
+  #OutPut-data {
+    display: none; /* Hidden by default */
+    width: 100%;
+    box-sizing: border-box;
+    padding: 2rem;
+    border: 1px solid #b2dfdb;
+    border-radius: 20px;
+    background-color: #f0fdfa;
+    color: #2d3748;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  }
+
+  /* Individual Alert Sections */
+  .alert-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px dashed #b2dfdb;
+  }
+
+  .alert-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .alert-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: teal;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .alert-list {
+    list-style-type: none; /* Remove default bullets */
+    padding-left: 0;
+    margin: 0;
+  }
+
+  .alert-list li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+
+  /* Custom Bullet Point */
+  .alert-list li::before {
+    content: "•";
+    color: teal;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    font-size: 1.2rem;
+    line-height: 1.4;
+  }
+
+  /* Loader */
+  .loader {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid teal;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    animation: spin 1s linear infinite;
+    margin: 10px auto;
+  }
+
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+  /* Mobile */
+  @media (max-width: 600px) {
+    .weather-form {
+      flex-direction: column;
+      gap: 10px;
+    }
+    .weather-form input, .weather-form button {
+      width: 100%;
+    }
+  }
+</style>
+
+<section class="weather-section">
+  
+  <div class="community-head">
+    <div class="text">Weather Alert System</div>
+  </div>
+
+  <h3 class="heading-subtitle">Enter your city to get real-time agricultural precautions</h3>
+  
+  <form class="weather-form" id="weather-form">
+    <input name="city" id="cityInput" placeholder="Enter City (e.g., London, Mumbai)" required autocomplete="off" />
+    <button type="submit" id="submitBtn">Get Report</button>
+  </form>
+
+  <div id="error-message" style="display:none; color: #d32f2f; text-align: center; margin-bottom: 20px; font-weight: bold;"></div>
+
+  <div id="OutPut-data">
+    
+    <div class="alert-section">
+      <div class="alert-title">🌡️ Temperature Analysis</div>
+      <p id="tempAlert" style="font-weight: 600; margin-bottom: 5px;"></p>
+      <ul id="tempMsg" class="alert-list"></ul>
+    </div>
+
+    <div class="alert-section">
+      <div class="alert-title">💧 Humidity Analysis</div>
+      <p id="humAlert" style="font-weight: 600; margin-bottom: 5px;"></p>
+      <ul id="humMsg" class="alert-list"></ul>
+    </div>
+
+    <div class="alert-section">
+      <div class="alert-title">🌧️ Precipitation Analysis</div>
+      <p id="rainAlert" style="font-weight: 600; margin-bottom: 5px;"></p>
+      <ul id="rainMsg" class="alert-list"></ul>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById("weather-form");
+  const cityInput = document.getElementById("cityInput");
+  const submitBtn = document.getElementById("submitBtn");
+  const outputDiv = document.getElementById("OutPut-data");
+  const errorDiv = document.getElementById("error-message");
+
+  let isSubmitting = false;
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    if (isSubmitting) return;
+    const city = cityInput.value.trim();
+    if (!city) return;
+
+    // 1. Lock Interface & Show Loading
+    isSubmitting = true;
+    cityInput.disabled = true;
+    submitBtn.disabled = true;
+    const originalBtnText = submitBtn.innerText;
+    submitBtn.innerText = "Scanning...";
+    
+    // Hide previous results/errors
+    errorDiv.style.display = "none";
+    outputDiv.style.display = "none"; 
+    
+    // Optional: You could show a loader div here, but "Scanning..." on button is often enough. 
+    // If you want a loader box, uncomment below:
+    // outputDiv.innerHTML = '<div class="loader"></div>'; 
+    // outputDiv.style.display = "block";
+
+    try {
+      const response = await fetch("/alert", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ city }),
+      });
+
+      const result = await response.json();
+
+      // Check for Backend Logic Errors (like "City not found")
+      if (result.error) {
+        throw new Error(result.error);
+      }
+
+      // Helper to render lists
+      const renderList = (elementId, items) => {
+        const listEl = document.getElementById(elementId);
+        listEl.innerHTML = ""; 
+        if (items && items.length > 0) {
+          items.forEach(item => {
+            const li = document.createElement("li");
+            li.textContent = item;
+            listEl.appendChild(li);
+          });
+        }
+      };
+
+      // 2. Populate Data
+      // Re-show the container in case we hid it or overwrote it with a loader
+      outputDiv.style.display = "block";
+
+      document.getElementById("tempAlert").innerText = result.tempAlert || "";
+      renderList("tempMsg", result.tempmsg);
+
+      document.getElementById("humAlert").innerText = result.humAlert || "";
+      renderList("humMsg", result.humMsg);
+
+      document.getElementById("rainAlert").innerText = result.rainAlert || "";
+      renderList("rainMsg", result.rainMsg);
+
+    } catch (error) {
+      console.error("Error:", error);
+      errorDiv.innerText = error.message || "An error occurred. Please try again.";
+      errorDiv.style.display = "block";
+    } finally {
+      // 3. Unlock Interface
+      isSubmitting = false;
+      cityInput.disabled = false;
+      submitBtn.disabled = false;
+      submitBtn.innerText = originalBtnText;
+      cityInput.focus();
+    }
+  });
+</script>

@@ -1,0 +1,114 @@
+<nav class="sidebar">
+  <header>
+    <div class="image-text">
+      <span class="Logoimage">
+        <img src="images/mainLogo.jpeg" alt=" ">
+      </span>
+
+      <div class="text header-text">
+        <span class="name" style="font-size: 22px; color: teal; margin-left: 1rem;">AgriAI</span>
+      </div> 
+    </div>
+
+    <i class="bx bxs-chevron-right toggle"></i>
+  </header>
+
+  <div class="menu-bar">
+    <div class="menu">
+      <ul class="menu-links">
+        <li class="search-box">
+          <i class="bx bx-search icon"></i>
+          <input type="text" placeholder="Search.." />
+        </li>
+        <li class="nav-link">
+          <a href="/">
+            <i class="bx bx-home icon"></i>
+            <span class="text nav-text">Home</span>
+          </a>
+        </li>
+        <li class="nav-link">
+          <a href="http://localhost:8501/">
+            <i class="bx bxs-leaf icon"></i>
+            <span class="text nav-text">Disease Detection</span>
+          </a>
+        </li>
+        <li class="nav-link">
+          <a href="/community">
+            <i class="bx bx-donate-heart icon"></i>
+            <span class="text nav-text">Community</span>
+          </a>
+        </li>
+        <li class="nav-link">
+          <a href="/fertilizer">
+            <i class="fa-solid fa-bug-slash icon"></i>
+            <span class="text nav-text">Fertilizer</span>
+          </a>
+        </li>
+        <li class="nav-link">
+          <a href="/alert">
+            <i class="fa-solid fa-circle-exclamation icon"></i>
+            <span class="text nav-text">Weather Alerts</span>
+          </a>
+        </li> 
+        <li class="nav-link">
+          <a href="/gemini">
+            <i class="fa-solid fa-robot icon"></i>
+            <span class="text nav-text">Chatbot</span>
+          </a>
+        </li>
+        <li class="nav-link">
+          <a href="/settings">
+            <i class="fa-solid fa-gear icon"></i>
+            <span class="text nav-text">Settings</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="bottom-content">
+      <li class="">
+        <% if(!currentUser){ %>
+          <a href="/login">
+          <i class="bx bx-log-in icon"></i>
+          <span class="text nav-text">Login</span>
+        </a>
+          <%}else{%>
+        <a href="/logout">
+          <i class="bx bx-log-out icon"></i>
+          <span class="text nav-text" onclick="return confirmLogout(event)">Logout</span>
+        </a>
+        <%}%>
+      </li>
+
+      <li class="mode">
+        <div class="moon-sun">
+          <i class="bx bx-moon icon moon"></i>
+          <i class="bx bx-sun icon sun"></i>
+        </div>
+
+        <span class="mode-text text">Dark Mode</span>
+        <div class="toggle-switch">
+            <span class="switch"></span>
+        </div>
+      </li>
+    </div>
+  </div> 
+</nav>
+
+<script>
+  // JavaScript function to handle logout confirmation
+  function confirmLogout(event) {
+    // Prevent default navigation
+    event.preventDefault();
+
+    // Show confirmation dialog
+    const userConfirmed = confirm("Do you really want to log out?");
+    
+    // If user confirmed, navigate to the logout route
+    if (userConfirmed) {
+      window.location.href = "/logout";
+    }
+  }
+</script>
+    <script src="/JS/script.js"></script>
+

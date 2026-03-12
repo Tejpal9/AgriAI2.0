@@ -1,0 +1,4 @@
+.env
+node_modules/
+keras_model/
+venv/

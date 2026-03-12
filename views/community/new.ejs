@@ -1,0 +1,51 @@
+<% layout("/layouts/boilerplate") %>
+
+<section class="home">
+  <div class="community-head">
+    <div class="text">Create A New Post</div>
+
+    
+  </div>
+<form
+  method="POST"
+  action="/community"
+  enctype="multipart/form-data"
+  class="new-post"
+>
+  <div class="form-field title">
+    <label for="title" class="form-label">Title</label>
+    <input
+      name="post[title]"
+      placeholder="Add a title"
+      type="text"
+      class="title"
+      required
+    />
+  </div>
+  <div class="form-field description">
+          <label for="description" class="form-label" >Description</label>
+          <textarea
+            name="post[description]"
+            placeholder="Enter description"
+            class="description"
+            rows="3" 
+            required
+          ></textarea>
+          
+        </div>
+
+
+<div style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+  <div class="form-field image-div">
+  <input class="uploader" name="post[image]" type="file" id="uploader">
+  <label for="uploader"><img class="new-upload-img"  src="/images/uploadImage.png"></label>
+    <span class="label-text" >Upload Image</span>
+</div>
+<button class="add-btn">Post</button><br>
+</div>
+<br /> 
+        
+</form>
+</div>
+
+</section>

@@ -1,0 +1,269 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: Montserrat, sans-serif;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Navbar */
+.navbar {
+  height: 4rem;
+  background-color: #d9f6f580;
+}
+
+.main-logo{
+  width: 5rem;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-link {
+  color: #008080 !important;
+  font-size: 20px;
+  font-weight: 500;
+  margin-right: 60px;
+}
+
+.nav-link:hover {
+  font-weight: 700;
+}
+
+/* Hero Section */
+
+.background-image {
+  background-repeat: no-repeat;
+  background-position: center center;
+  /* background-attachment: fixed; */
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.hero {
+  display: flex;
+  margin: 4rem;
+  margin-top: 16rem;
+  align-items: center;
+  /* border: 2px solid #2c6455; */
+}
+
+.title-part {
+  padding: 0.5rem 2rem;
+}
+.welcome-Mgs {
+  font-family: Atma, sans-serif;
+  font-size: 50px !important;
+}
+
+.steps {
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
+  margin-bottom: 1rem;
+}
+
+.step-img {
+  width: 8rem;
+}
+
+.arrow-img {
+  /* width: 6rem; */
+  height: 8rem;
+  /* border: 1px solid black; */
+  transform: rotate(28deg);
+  margin-left: -2.6rem !important;
+}
+
+.call-to-action {
+  display: flex;
+  justify-content: center;
+}
+
+.call-to-action button {
+  padding: 0.8rem 1rem;
+  background-color: #2e8b57;
+  color: #fff;
+}
+
+.call-to-action button:hover {
+  border: 2px solid #008080;
+  background-color: transparent;
+}
+
+.call-to-action a {
+  text-decoration: none;
+  color: #000;
+}
+
+/* Next Part */
+.leaf-img {
+  width: 30rem;
+  margin-left: -5rem;
+  margin-top: -3rem;
+  /* transform: rotate(-25deg); */
+}
+
+.outer-of-feature {
+  display: flex;
+  margin-bottom: 2rem;
+  /* font-family: 'DM Serif Text'; */
+}
+
+.keyFeatures {
+  width: 100%;
+}
+
+.feature-row {
+  justify-content: center;
+  margin: 2rem 1rem;
+}
+
+.feature-col {
+  padding: 1rem 2rem;
+  font-family: "Roboto", sans-serif;
+  color: #008080;
+}
+
+.feature-col h3 {
+  font-weight: 600;
+}
+
+.feature-img {
+  width: 4rem;
+  margin-bottom: 1rem;
+}
+
+/* Footer */
+.footer-row {
+  background-color: #353535;
+  color: #fff;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+
+
+/* .like-btns {
+  margin-right: -4rem;
+} */
+
+
+
+
+/* Signup page */
+.sub-top a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #2c6455;
+  text-decoration: none;
+  padding: 2rem;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 920px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* .container-left {
+    width: 100%;
+    padding-top: 40px;
+} */
+
+.goto-login {
+  display: flex;
+  justify-content: right;
+}
+
+.goto-login a {
+  text-decoration: none;
+  margin-bottom: 1rem;
+}
+
+.container-right {
+  width: 380px;
+  flex: none;
+  margin-left: 20px;
+}
+
+.white-card {
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(99, 182, 142, 0.15);
+  border-radius: 24px;
+  padding: 40px 20px;
+}
+
+.form {
+  padding: 20px 0;
+}
+
+.form-header {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+  color: #2c6455;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.form-hint {
+  font-size: 11px;
+  color: #718096;
+  justify-self: center;
+}
+
+.form input,
+.hosted-field {
+  width: 100%;
+  height: 60px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  background-color: #fff !important;
+  padding: 18px 16px;
+  box-sizing: border-box;
+  color: #718096 !important;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  outline: none;
+}
+
+.form-password {
+  position: relative;
+}
+
+.form-submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 56px;
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  background: linear-gradient(90.05deg, #81d4ad 0.05%, #55c992 99.95%);
+  border-radius: 53px;
+  margin: 20px auto;
+  border: none;
+  /* color: #fff; */
+  text-decoration: none;
+}
+
+
+
+ 

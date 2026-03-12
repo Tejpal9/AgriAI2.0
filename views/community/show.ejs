@@ -1,0 +1,132 @@
+<% layout("/layouts/boilerplate") %>
+
+<section class="home">
+  <div class="community-head">
+    <div class="text">Show Page</div>
+
+    <a href="/community/new" style="text-decoration: none">
+      <div class="create-post">
+        Create post
+        <i class="fa-solid fa-circle-plus" style="margin-left: 2rem"></i>
+      </div>
+    </a> 
+  </div> 
+
+  <div class="card">
+    <div class="user-details">
+      <i class="bx bxs-user-circle user-logo"></i>
+      <span>
+        <h4 class="userName"><%=post.owner.username%></h4>
+        <p class="post-time">
+          <%=(post.createdAt).toString().split(" ").slice(0,4).join("-")%>
+        </p></span
+      >
+    </div>
+    <div class="listing-link">
+      <% if(post.image.url != null){ %>
+      <img src="<%=post.image.url%>" class="card-img-top" alt="..." />
+      <%}%>
+      <div class="card-content">
+        <div class="card-body">
+          <h5 class="card-title"><%= post.title %></h5>
+          <p class="card-text"><%= post.description %></p>
+        </div>
+        <div class="react-btns">
+          <div class="like-part">
+            <button id="like-btn" class="like-btn">
+              <i class='bx bx-like empty'></i>
+              <i class='bx bxs-like filled'></i>
+            </button>
+            <span id="like-count" ><%= post.likes %></span>
+          </div>
+          <form
+            method="POST"
+            action="/community/<%=post.id%>?_method=DELETE"
+            class="like-part"
+          >
+            <% if(currentUser && currentUser._id.equals(post.owner._id)){ %>
+            <button
+            class="delete-btn"
+            >
+              <i class="fa-solid fa-trash-can fa-xl"></i>
+            </button>
+              <%}%>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div class="card">
+            <form class="comment" method="POST" action="/community/<%=post.id%>/comments">
+          <div style="width: 100%">
+            <textarea
+              name="commentText"
+              class="form-control"
+              rows="3"
+              placeholder="Comment something..."
+              required
+            ></textarea>
+          </div>
+          <button class="btn post-btn" type="submit">
+            <i class="fa-regular fa-paper-plane fa-xl"></i>
+          </button>
+        </form>
+
+        <%if(post.comments.length>0){ %>
+        
+        <h3 style="margin: 1rem;">Comments <span style="margin-left: 1rem; font-size: 15px; font-weight: 200;">(<%=post.comments.length%>)</span></h3>
+        <hr class="hr-tag"/>
+          <% for(comment of post.comments ) {%>
+            <div class="eachCmt">
+          <div class="comment-body">
+            <h5 class="comment-title">@<%= comment.author.username %></h5>
+            <p style="font-size: 11px; color: #718096;"><%= (comment.author.createdAt).toString().split(" ").slice(0,4).join("-") %></p>
+            <p class="comment-text"><%= comment.commentText %></p>
+          </div>
+          <hr style="margin-top: .5rem">
+          </div>
+          <% } %>
+        
+        <% } %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+
+
+  const likeBtn = body.querySelector(".like-btn");
+  const linePart = body.querySelector(".like-part ");
+  
+
+likeBtn.addEventListener("click", () => {
+  linePart.classList.toggle("clicked");
+});
+
+  document.getElementById("like-btn").addEventListener("click", async () => {
+    const userId = "<%=currentUser._id%>"; // You should replace this with the real logged-in user ID
+    const postId = "<%= post._id %>";
+    // console.log(userId);
+
+    const response = await fetch(`/community/like/${postId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId }),
+    });
+
+    const data = await response.json();
+
+
+    document.getElementById("like-count").textContent = data.likes;
+  });
+</script>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+  crossorigin="anonymous"
+></script>

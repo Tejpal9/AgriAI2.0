@@ -1,0 +1,399 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  /* === Main Container === */
+  .fertilizer-section {
+    width: 95%;
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 1rem;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .community-head .text {
+    font-size: 2.6rem;
+    font-weight: 900;
+    color: #0a6d66;
+    text-align: center;
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.5px;
+  }
+
+  .heading-subtitle {
+    text-align: center;
+    color: #556b7a;
+    font-size: 400 1.15rem/1.6rem;
+    max-width: 660px;
+    margin-bottom: 3rem;
+  }
+
+  /* === Main Card – Bigger & More Premium === */
+  .calc-form {
+    width: 100%;
+    max-width: 1100px;
+    background: #ffffff;
+    padding: 3.2rem 3.8rem;
+    padding-right: 980px; /* space for decorative strip + button */
+    border-radius: 28px;
+    box-shadow: 0 24px 60px rgba(10, 50, 45, 0.09);
+    border: 1px solid rgba(180, 230, 220, 0.4);
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  /* Decorative Right Strip – Enhanced Gradient */
+  .right-strip {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 360px;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      rgba(220, 250, 242, 0.96) 0%, 
+      rgba(230, 255 245, 0.78) 60%, 
+      rgba(240, 255, 250, 0.5) 100%);
+    border-radius: 28px 28px 28px 28px;
+    box-shadow: -12px 0 40px rgba(10, 80, 70, 0.08);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Form Grid */
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Section Titles */
+  .section-title {
+    color: #0a6d66;
+    font-size: 1.32rem;
+    font-weight: 800;
+    margin-bottom: 1.6rem;
+    padding-bottom: 10px;
+    border-bottom: 3px solid rgba(100, 210, 190, 0.35);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .form-group {
+    margin-bottom: 1.6rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+    font-size: 1rem;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 1.05rem;
+    background: #f8fffe;
+    border: 2px solid #e0f5f3;
+    border-radius: 16px;
+    transition: all 0.25s ease;
+    color: #1a3c40;
+  }
+
+  .form-group input:focus {
+    outline: none;
+    border-color: #0a9d92;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(10, 157, 146, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .form-group input::placeholder {
+    color: #94b2b0;
+  }
+
+  /* Floating Button – Bigger & Bolder */
+  .recommenBtn {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 20px 42px;
+    background: linear-gradient(135deg, #028f86, #00b3a6);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 1.22rem;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    cursor: pointer;
+    box-shadow: 0 12px 32px rgba(2, 143, 134, 0.3);
+    transition: all 0.3s ease;
+    z-index: 10;
+    min-width: 300px;
+    text-align: center;
+  }
+
+  .recommenBtn:hover {
+    transform: translateY(-54%);
+    box-shadow: 0 18px 40px rgba(2, 143, 134, 0.4);
+    background: linear-gradient(135deg, #00756f, #00998e);
+  }
+
+  .recommenBtn:disabled {
+    background: #94a3b8;
+    transform: none;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+
+  /* Results Section */
+  #result-div {
+    display: none;
+    margin-top: 3.5rem;
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  .results-header {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #0a6d66;
+    margin-bottom: 2rem;
+  }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .result-card {
+    background: linear-gradient(145deg, #ffffff, #f5fffc);
+    border: 2px solid rgba(100, 210, 190, 0.5);
+    border-radius: 20px;
+    padding: 2.2rem 1.6rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 12px 30px rgba(10, 60, 50, 0.06);
+  }
+
+  .result-card:hover {
+    transform: translateY(-10px);
+    border-color: #0a9d92;
+    box-shadow: 0 20px 40px rgba(10, 100, 90, 0.15);
+  }
+
+  .res-label {
+    font-size: 1rem;
+    color: #506a7a;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  .res-value {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #0a6d66;
+  }
+
+  .loader {
+    border: 5px solid #f0fffd;
+    border-top: 5px solid #0a9d92;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    animation: spin 1s linear infinite;
+    margin: 40px auto;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* === Responsive === */
+  @media (max-width: 992px) {
+    .calc-form { padding-right: 3rem; padding-left: 3rem; }
+    .right-strip { width: 300px; }
+    .recommenBtn { min-width: 220px; padding: 18px 36px; }
+  }
+
+  @media (max-width: 880px) {
+    .right-strip { display: none; }
+    .calc-form {
+      padding: 2.5rem 2.2rem !important;
+      padding-right: 2.2rem !important;
+    }
+    .form-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .recommenBtn {
+      position: static;
+      transform: none;
+      width: 100%;
+      margin: 1.5rem auto 0;
+      padding: 18px;
+      border-radius: 16px;
+    }
+    .results-grid { grid-template-columns: 1fr; }
+    .community-head .text { font-size: 2.1rem; }
+  }
+
+  @media (max-width: 480px) {
+    .community-head .text { font-size: 1.9rem; }
+    .heading-subtitle { font-size: 1rem; }
+    .calc-form { padding: 2rem 1.5rem; border-radius: 20px; }
+  }
+</style>
+
+<section class="fertilizer-section">
+  <div class="community-head">
+    <div class="text">Fertilizer Calculator</div>
+  </div>
+  <h3 class="heading-subtitle">Get precise N-P-K recommendations tailored to your crop's needs</h3>
+
+  <form id="fertilizerForm" class="calc-form" autocomplete="off" novalidate>
+    <div class="right-strip" aria-hidden="true"></div>
+
+    <div class="form-grid">
+      <!-- Left Column -->
+      <div>
+        <div class="section-title">Plant Details</div>
+
+        <div class="form-group">
+          <label for="plant">Plant Name *</label>
+          <input id="plant" name="plant" type="text" placeholder="Eg. Tomato, Wheat, Rice" required />
+        </div>
+
+        <div class="form-group">
+          <label for="growthStage">Growth Stage *</label>
+          <input id="growthStage" name="growthStage" type="text" placeholder="Eg. Vegetative, Flowering, Fruiting" required />
+        </div>
+
+        <div class="form-group">
+          <label for="disease">Disease / Symptom (Optional)</label>
+          <input id="disease" name="disease" type="text" placeholder="Eg. Yellowing leaves, Blight, Rust" />
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div>
+        <div class="section-title">Soil Analysis (Optional)</div>
+
+        <div class="form-group">
+          <label for="soilN">Nitrogen (N) – Current level</label>
+          <input id="soilN" name="soilN" type="number" step="any" placeholder="mg/kg (e.g. 120)" />
+        </div>
+
+        <div class="form-group">
+          <label for="soilP">Phosphorus (P) – Current level</label>
+          <input id="soilP" name="soilP" type="number" step="any" placeholder="mg/kg (e.g. 25)" />
+        </div>
+
+        <div class="form-group">
+          <label for="soilK">Potassium (K) – Current level</label>
+          <input id="soilK" name="soilK" type="number" step="any" placeholder="mg/kg (e.g. 180)" />
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="recommenBtn">Calculate Recommendation</button>
+  </form>
+
+  <div id="error-message" style="display:none; color: #d32f2f; margin-top: 1.5rem; font-weight: 700; background: #ffebee; padding: 14px 20px; border-radius: 12px; text-align: center;"></div>
+
+  <div id="loading" style="display:none;">
+    <div class="loader" role="status"></div>
+    <p style="text-align:center; color:#0a6d66; margin-top:12px;">Analyzing your crop data...</p>
+  </div>
+
+  <div id="result-div" aria-live="polite">
+    <div class="results-header">Recommended Fertilizer Dosage (kg/ha)</div>
+    <div class="results-grid">
+      <div class="result-card">
+        <span class="res-label">Nitrogen (N)</span>
+        <div id="resN" class="res-value">--</div>
+      </div>
+      <div class="result-card">
+        <span class="res-label">Phosphorus (P)</span>
+        <div id="resP" class="res-value">--</div>
+      </div>
+      <div class="result-card">
+        <span class="res-label">Potassium (K)</span>
+        <div id="resK" class="res-value">--</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Your existing script remains unchanged -->
+<script>
+  const form = document.getElementById("fertilizerForm");
+  const resultDiv = document.getElementById("result-div");
+  const loadingDiv = document.getElementById("loading");
+  const errorDiv = document.getElementById("error-message");
+
+  let isSubmitting = false;
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    if (isSubmitting) return;
+
+    const plant = this.plant.value.trim();
+    const growthStage = this.growthStage.value.trim();
+    const disease = this.disease.value.trim() || null;
+
+    const soilData = {
+      N: parseFloat(this.soilN.value) || 0,
+      P: parseFloat(this.soilP.value) || 0,
+      K: parseFloat(this.soilK.value) || 0
+    };
+
+    if (!plant || !growthStage) {
+      errorDiv.textContent = "Please provide Plant Name and Growth Stage.";
+      errorDiv.style.display = "block";
+      return;
+    }
+
+    isSubmitting = true;
+    form.querySelector(".recommenBtn").textContent = "Analyzing...";
+    form.querySelector(".recommenBtn").disabled = true;
+    resultDiv.style.display = "none";
+    errorDiv.style.display = "none";
+    loadingDiv.style.display = "block";
+
+    try {
+      const response = await fetch("/fertilizer", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plant, growthStage, disease, soilData })
+      });
+
+      if (!response.ok) throw new Error("Server error");
+
+      const data = await response.json();
+
+      document.getElementById("resN").textContent = data.N ?? "--";
+      document.getElementById("resP").textContent = data.P ?? "--";
+      document.getElementById("resK").textContent = data.K ?? "--";
+
+      resultDiv.style.display = "block";
+      resultDiv.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+    } catch (err) {
+      errorDiv.textContent = "Could not get recommendation. Please try again.";
+      errorDiv.style.display = "block";
+    } finally {
+      isSubmitting = false;
+      form.querySelector(".recommenBtn").textContent = "Calculate Recommendation";
+      form.querySelector(".recommenBtn").disabled = false;
+      loadingDiv.style.display = "none";
+    }
+  });
+</script>

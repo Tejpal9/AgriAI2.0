@@ -1,0 +1,38 @@
+<div
+  class="background-image"
+  style="
+    background-image: url('images/right-side-leaf.png');
+    margin-top: -4rem;
+    border: 1px solid transparent;
+    margin-bottom: 2rem;
+  "
+>
+  <div class="row hero">
+    <div class="col-5">
+        <div class="title-part">
+          <% if(currentUser) { %> 
+      <h1 class="welcome-Mgs">Welcome <%= currentUser.username%>!</h1>
+      <%}%>
+      <!-- < if(!currentUser) { %> 
+        <p>Log in to explore everything..</p>
+        <a href="/login"><button class="btn btn-pill">Login</button></a>
+        <}%> -->
+      <h4>Empowering Farmers and Gardeners to Detect and Prevent Plant Diseases</h4>
+      <p>Instantly diagnose, connect with the community, and get weather-based alerts.</p>
+      </div>
+      
+      <div class="row steps ">
+        <div class="col-4 step"><img class="step-img" src="images/photogprah_9284129.png" ><p style="margin-top: .6rem; margin-left: 3px;">Take a picture</p></div>
+        <div class="col-2 step"><img class="arrow-img" src="images/curly-arrow.png" ></div>
+        <div class="col-4 step"><img class="step-img" style="width: 9rem; margin-top: -10px;" src="images/research.png" ><p style=" margin-left: 2rem;">See diagnose</p></div>
+
+      </div>
+
+      
+      <div class="call-to-action">
+        <a href="http://localhost:8501/"><button class="btn" style="margin-right:2rem ;">Upload a Photo for Diagnosis</button></a>
+        <a href="/community"><button class="btn">Join Community</button></a>
+      </div>
+    </div>
+  </div>
+</div>

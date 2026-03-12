@@ -1,0 +1,244 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  /* --- Chat Page Styles --- */
+  .chat-section {
+    width: 95%; /* Responsive width */
+    max-width: 900px; /* Cap at 900px for a comfortable reading width */
+    margin: 3rem auto;
+    padding: 0 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .community-head .text {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: teal;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .heading-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2.5rem;
+    font-size: 1.2rem;
+  }
+
+  /* --- Form Styling --- */
+  .chat-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; 
+    
+    /* Full width of the parent container (.chat-section) */
+    width: 100%; 
+    margin-bottom: 2rem; 
+    position: relative;
+  }
+
+  .chat-form input {
+    flex: 1; /* Stretch to fill space */
+    padding: 16px 24px;
+    border: 2px solid #e0e0e0;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+
+  .chat-form input:focus {
+    border-color: teal;
+    box-shadow: 0 6px 15px rgba(0,128,128,0.15);
+    transform: translateY(-1px);
+  }
+
+  .chat-form button {
+    flex-shrink: 0; 
+    padding: 16px 36px;
+    background-color: teal;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,128,128,0.2);
+  }
+
+  .chat-form button:hover {
+    background-color: #006d6d;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,128,128,0.3);
+  }
+
+  .chat-form button:disabled,
+  .chat-form input:disabled {
+    background-color: #f5f5f5;
+    color: #aaa;
+    border-color: #eee;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* --- Output Box Styling --- */
+  #OutPut-data {
+    display: none;
+    
+    /* Match the form width perfectly */
+    width: 100%; 
+    box-sizing: border-box; /* Ensures padding doesn't break width */
+    
+    padding: 2.5rem;
+    border: 1px solid #b2dfdb;
+    border-radius: 20px;
+    background-color: #f0fdfa;
+    color: #2d3748;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  }
+
+  /* Prevent AI Headers from being too big */
+  #OutPut-data h1, 
+  #OutPut-data h2, 
+  #OutPut-data h3 {
+    color: teal;
+    margin-top: 0;
+    font-size: 1.5rem;
+  }
+
+  /* Loader */
+  .loader {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid teal;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    animation: spin 1s linear infinite;
+    margin: 10px auto;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Mobile Responsiveness */
+  @media (max-width: 600px) {
+    .chat-form {
+      flex-direction: column;
+      gap: 10px;
+    }
+    .chat-form input, 
+    .chat-form button {
+      width: 100%;
+    }
+    #OutPut-data {
+      padding: 1.5rem; /* Less padding on mobile */
+    }
+  }
+</style>
+
+<section class="chat-section">
+  
+  <div class="community-head">
+    <div class="text">Plant AI Assistant</div>
+  </div>
+
+  <h3 class="heading-subtitle">Ask me anything about farming, plant diseases, or soil care!</h3>
+  
+  <form class="chat-form" id="chatForm">
+    <input name="text" id="questionInput" placeholder="E.g., Why are my tomato leaves turning yellow?" autocomplete="off" required />
+    <button type="submit" id="submitBtn">Ask AI</button>
+  </form>
+
+  <div id="OutPut-data">
+    </div>
+
+</section>
+
+<script>
+  const chatForm = document.getElementById("chatForm");
+  const inputField = document.getElementById("questionInput");
+  const submitBtn = document.getElementById("submitBtn");
+  const outputDiv = document.getElementById("OutPut-data");
+
+  let isSubmitting = false;
+
+  // --- NEW: Function to remove ```html and ``` tags ---
+  function cleanMarkdown(text) {
+    return text
+      .replace(/^```html\s*/i, '')  // Remove starting ```html
+      .replace(/^```\s*/i, '')      // Remove starting ```
+      .replace(/```$/i, '')         // Remove ending ```
+      .trim();                      // Remove extra whitespace
+  }
+
+  chatForm.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    if (isSubmitting) return;
+    const userInput = inputField.value.trim();
+    if (!userInput) return;
+
+    // 1. Lock Interface & Show Loading
+    isSubmitting = true;
+    inputField.disabled = true;
+    submitBtn.disabled = true;
+    const originalBtnText = submitBtn.innerText;
+    submitBtn.innerText = "Thinking...";
+    
+    outputDiv.style.display = "block";
+    outputDiv.innerHTML = '<div class="loader"></div>';
+
+    try {
+      const response = await fetch("/gemini", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: userInput }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Server response was not ok");
+      }
+
+      let result = await response.text();
+
+      // 2. Clean the Markdown Tags first
+      result = cleanMarkdown(result);
+
+      // 3. Format Bold and Newlines
+      const formattedResult = result
+        .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>') // Bold
+        .replace(/\*/g, '&bull;')              // Bullets
+        .replace(/\n/g, '<br>');               // Line breaks
+
+      outputDiv.innerHTML = formattedResult;
+      
+      inputField.value = "";
+
+    } catch (error) {
+      console.error("Chat Error:", error);
+      outputDiv.innerHTML = `<div style="color: #d32f2f; text-align: center;">
+        <strong>⚠️ Oops! Something went wrong.</strong><br>
+        Please check your connection and try again.
+      </div>`;
+    } finally {
+      // 4. Unlock Interface
+      isSubmitting = false;
+      inputField.disabled = false;
+      submitBtn.disabled = false;
+      submitBtn.innerText = originalBtnText;
+      inputField.focus();
+    }
+  });
+</script>

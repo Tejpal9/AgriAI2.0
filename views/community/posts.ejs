@@ -1,0 +1,43 @@
+<!-- < layout("/layouts/boilerplate") %> -->
+<section class="home">
+  <div class="community-head">
+    <div class="text">Community</div>
+    <!-- <img class="comImg" src="images/big-leaf.webp"> -->
+
+    <a href="/community/new" style="text-decoration: none">
+      <div class="create-post">
+        Create post
+        <i class="fa-solid fa-circle-plus" style="margin-left: 2rem"></i>
+      </div>
+    </a>
+  </div>
+
+  <% for(let post of allPosts){ %>
+  <div class="card">
+    <div class="user-details">
+      <i class="bx bxs-user-circle user-logo"></i>
+      <span>
+        <h4 class="userName"><%=post.owner.username%></h4>
+        <p class="post-time">
+          <%=(post.createdAt).toString().split(" ").slice(0,4).join("-")%>
+        </p></span
+      >
+    </div>
+    <a href="/community/<%= post._id %>" class="listing-link">
+      <% if(post.image.url != null){ %>
+      <img src="<%=post.image.url%>" class="card-img-top" alt="..." />
+      <%}%>
+      <div class="card-body">
+        <h5 class="card-title"><%= post.title %></h5>
+        <p class="card-text"><%= post.description %></p>
+      </div>
+    </a>
+  </div>
+
+  <% } %>
+  <br><br>
+    <!-- <- include("../includes/footer.ejs") %> -->
+
+</section>
+
+
