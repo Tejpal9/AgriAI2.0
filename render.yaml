@@ -29,7 +29,7 @@ services:
     name: plant-disease-streamlit
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install --no-cache-dir -r requirements.txt
     startCommand: streamlit run cure.py --server.port=$PORT --server.address=0.0.0.0 --browser.gatherUsageStats=false
     envVars:
       - key: PYTHON_VERSION
