@@ -10,13 +10,13 @@ body {
   overflow-x: hidden;
 }
 
-/* Navbar */
+/* ===== Navbar ===== */
 .navbar {
   height: 4rem;
   background-color: #d9f6f580;
 }
 
-.main-logo{
+.main-logo {
   width: 5rem;
 }
 
@@ -36,12 +36,10 @@ body {
   font-weight: 700;
 }
 
-/* Hero Section */
-
+/* ===== Hero Section ===== */
 .background-image {
   background-repeat: no-repeat;
   background-position: center center;
-  /* background-attachment: fixed; */
   background-size: cover;
   height: 100%;
   width: 100%;
@@ -52,20 +50,22 @@ body {
   margin: 4rem;
   margin-top: 16rem;
   align-items: center;
-  /* border: 2px solid #2c6455; */
 }
 
 .title-part {
   padding: 0.5rem 2rem;
 }
+
 .welcome-Mgs {
   font-family: Atma, sans-serif;
   font-size: 50px !important;
 }
 
+/* ===== Steps ===== */
 .steps {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin: 1rem;
   margin-bottom: 1rem;
 }
@@ -75,16 +75,17 @@ body {
 }
 
 .arrow-img {
-  /* width: 6rem; */
   height: 8rem;
-  /* border: 1px solid black; */
   transform: rotate(28deg);
   margin-left: -2.6rem !important;
 }
 
+/* ===== Call To Action ===== */
 .call-to-action {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
 }
 
 .call-to-action button {
@@ -103,18 +104,17 @@ body {
   color: #000;
 }
 
-/* Next Part */
+/* ===== Key Features Section ===== */
 .leaf-img {
   width: 30rem;
   margin-left: -5rem;
   margin-top: -3rem;
-  /* transform: rotate(-25deg); */
 }
 
 .outer-of-feature {
   display: flex;
+  align-items: flex-start;
   margin-bottom: 2rem;
-  /* font-family: 'DM Serif Text'; */
 }
 
 .keyFeatures {
@@ -141,7 +141,7 @@ body {
   margin-bottom: 1rem;
 }
 
-/* Footer */
+/* ===== Footer ===== */
 .footer-row {
   background-color: #353535;
   color: #fff;
@@ -149,16 +149,7 @@ body {
   text-align: center;
 }
 
-
-
-/* .like-btns {
-  margin-right: -4rem;
-} */
-
-
-
-
-/* Signup page */
+/* ===== Signup / Auth Pages ===== */
 .sub-top a {
   display: flex;
   justify-content: center;
@@ -178,11 +169,6 @@ body {
   padding: 0 20px;
   box-sizing: border-box;
 }
-
-/* .container-left {
-    width: 100%;
-    padding-top: 40px;
-} */
 
 .goto-login {
   display: flex;
@@ -260,68 +246,251 @@ body {
   border-radius: 53px;
   margin: 20px auto;
   border: none;
-  /* color: #fff; */
   text-decoration: none;
 }
 
-/* Tablet & Mobile Screens */
-@media screen and (max-width: 900px) {
-  .container {
-    flex-direction: column;
-  }
-  .container-right {
-    margin-left: 0;
-    width: 100%;
-    margin-top: 2rem;
-  }
+/* =============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================= */
+
+/* ===== Large Tablets (max-width: 1024px) ===== */
+@media screen and (max-width: 1024px) {
   .hero {
-    margin-top: 10rem;
-    flex-direction: column;
-    text-align: center;
+    margin-top: 12rem;
+    margin: 12rem 2rem 2rem 2rem;
   }
+
   .leaf-img {
-    margin: 0 auto;
-    width: 80%;
+    width: 22rem;
+    margin-left: -2rem;
   }
+
   .welcome-Mgs {
     font-size: 40px !important;
   }
 }
 
+/* ===== Tablets (max-width: 900px) ===== */
+@media screen and (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .container-right {
+    margin-left: 0;
+    width: 100%;
+    margin-top: 2rem;
+  }
+
+  .hero {
+    margin-top: 10rem;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* Hero column: override Bootstrap col-5 to full width */
+  .hero .col-5 {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+  }
+
+  .title-part {
+    padding: 0.5rem 1rem;
+  }
+
+  .welcome-Mgs {
+    font-size: 38px !important;
+  }
+
+  .steps {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .call-to-action {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .call-to-action a {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .call-to-action button {
+    width: 100%;
+  }
+
+  /* Key Features */
+  .outer-of-feature {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .leaf-img {
+    width: 70%;
+    margin: 0 auto 1rem auto;
+  }
+
+  .feature-col {
+    text-align: center;
+    padding: 1rem;
+  }
+
+  /* Override Bootstrap col-4, col-5, col-6 in feature rows */
+  .feature-row .col-4,
+  .feature-row .col-5,
+  .feature-row .col-6 {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+  }
+}
+
+/* ===== Mobile (max-width: 768px) ===== */
 @media screen and (max-width: 768px) {
   .navbar {
     height: auto;
-    padding-bottom: 1rem;
+    padding: 0.5rem 0 1rem 0;
   }
+
   .nav-links {
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
   }
+
   .nav-link {
     margin-right: 0;
     font-size: 16px;
   }
+
+  .main-logo {
+    width: 4rem;
+  }
+
   .hero {
     margin: 6rem 1rem 2rem 1rem;
+    text-align: center;
   }
-  .welcome-Mgs {
-    font-size: 32px !important;
-  }
+
   .title-part {
     padding: 0;
   }
-  .steps, .outer-of-feature {
+
+  .welcome-Mgs {
+    font-size: 32px !important;
+  }
+
+  .hero h4 {
+    font-size: 16px;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+
+  /* Steps: stack vertically */
+  .steps {
     flex-direction: column;
-    margin: 2rem 1rem;
+    align-items: center;
+    margin: 1.5rem 0;
+  }
+
+  .steps .col-4,
+  .steps .col-2 {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
     text-align: center;
   }
-  .arrow-img {
-    transform: rotate(90deg); /* Point arrow down */
-    margin: 1rem auto !important;
+
+  .step-img {
+    width: 6rem;
   }
+
+  .arrow-img {
+    height: 5rem;
+    transform: rotate(90deg); /* point down */
+    margin: 0.25rem auto !important;
+    display: block;
+  }
+
+  /* Key Features heading */
+  .keyFeatures-heading {
+    font-size: 38px !important;
+  }
+
+  .leaf-img {
+    width: 90%;
+    margin: 0 auto 1rem auto;
+  }
+
+  .feature-col {
+    padding: 1rem 1.5rem;
+    text-align: center;
+  }
+
+  /* Footer */
+  .footer-row {
+    padding: 1.5rem 0.75rem;
+    font-size: 14px;
+  }
+}
+
+/* ===== Small Mobile (max-width: 480px) ===== */
+@media screen and (max-width: 480px) {
+  .welcome-Mgs {
+    font-size: 26px !important;
+  }
+
+  .hero h4 {
+    font-size: 14px;
+  }
+
+  .hero p {
+    font-size: 13px;
+  }
+
+  .call-to-action button {
+    font-size: 14px;
+    padding: 0.6rem 0.8rem;
+  }
+
   .leaf-img {
     width: 100%;
-    margin: 0 auto;
+  }
+
+  .feature-img {
+    width: 3rem;
+  }
+
+  .feature-col h3 {
+    font-size: 16px;
+  }
+
+  .feature-col p {
+    font-size: 13px;
+  }
+
+  .white-card {
+    padding: 24px 14px;
+    border-radius: 16px;
+  }
+
+  .form-header {
+    font-size: 20px;
+  }
+
+  .form input {
+    height: 50px;
+    font-size: 14px;
+  }
+
+  .form-submit {
+    height: 48px;
+    font-size: 14px;
   }
 }
