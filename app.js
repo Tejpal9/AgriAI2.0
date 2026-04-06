@@ -108,7 +108,7 @@ app.get("/detect", (req, res) => {
 
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 app.get("/gemini", (req, res) => {
   res.render("chatbot/chatbot.ejs");
 });
