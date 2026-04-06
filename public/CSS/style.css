@@ -264,6 +264,34 @@ body {
   text-decoration: none;
 }
 
+/* Tablet & Mobile Screens */
+@media screen and (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+  .container-right {
+    margin-left: 0;
+    width: 100%;
+    margin-top: 2rem;
+  }
+}
 
-
- 
+@media screen and (max-width: 768px) {
+  .hero, .steps, .outer-of-feature {
+    flex-direction: column;
+    margin: 2rem 1rem;
+    text-align: center;
+  }
+  .arrow-img {
+    transform: rotate(90deg); /* Point arrow down */
+    margin: 1rem auto !important;
+  }
+  .nav-links {
+    flex-direction: column;
+    display: none; /* Can be toggled with JavaScript for a hamburger menu */
+  }
+  .leaf-img {
+    width: 100%;
+    margin: 0 auto;
+  }
+}

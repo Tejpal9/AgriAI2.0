@@ -404,3 +404,41 @@ body.dark #OutPut-data p {
 .outputdiv {
   margin: 1rem 20rem;
 }
+
+/* Tablet & Mobile Screens */
+@media screen and (max-width: 900px) {
+  /* Fix oversized margins */
+  #OutPut-data, #user-input, .outputdiv {
+    margin: 1rem 2rem;
+  }
+
+  /* Stack Fertilizer Form vertically */
+  #fertilizerForm {
+    flex-direction: column;
+    width: 90%;
+    margin: 2rem auto;
+  }
+  #fertilizerForm .each-col {
+    width: 100%;
+    align-items: center;
+  }
+
+  /* Fix Predict Button which uses absolute positioning */
+  .predict-btn {
+    position: relative;
+    left: 0;
+    margin: 2rem auto;
+    display: block;
+    width: fit-content;
+  }
+  
+  /* Stack Image Uploading sections */
+  .uploaded-div, .preview {
+    margin: 1rem auto;
+    width: 90%;
+  }
+  .outer-ulpoder {
+    flex-direction: column;
+    align-items: center;
+  }
+}

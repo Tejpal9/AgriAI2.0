@@ -655,3 +655,31 @@ body.dark .label-text{
   bottom: 0;
   margin: 1rem;
 }
+
+/* Tablet & Mobile Screens */
+@media screen and (max-width: 900px) {
+  /* Hide sidebar by default on mobile or keep it collapsed */
+  .sidebar {
+    left: -250px; 
+    z-index: 1000;
+  }
+  /* Make main content take full width */
+  .home, .sidebar.close ~ .home {
+    left: 0;
+    width: 100%;
+  }
+  /* Fix massive margins on new post form */
+  .new-post {
+    margin: 1rem 2rem;
+  }
+  /* Make images responsive */
+  .card-img-top {
+    width: 100%;
+    height: auto !important;
+    margin-bottom: 1rem;
+  }
+  /* Stack list items */
+  .listing-link {
+    flex-direction: column;
+  }
+}
