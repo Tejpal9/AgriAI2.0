@@ -11,6 +11,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-sizing: border-box;
   }
 
   .community-head .text {
@@ -25,7 +26,9 @@
     text-align: center;
     color: #666;
     margin-bottom: 2.5rem;
-    font-size: 1.2rem;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    max-width: 600px;
   }
 
   /* --- Form Styling --- */
@@ -33,20 +36,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
+    gap: 12px;
     width: 100%;
     margin-bottom: 2rem;
+    flex-wrap: wrap;
   }
 
   .weather-form input {
-    flex: 1; /* Stretch to fill space */
+    flex: 1;
+    min-width: 200px;
     padding: 16px 24px;
     border: 2px solid #e0e0e0;
     border-radius: 50px;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     outline: none;
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    box-sizing: border-box;
   }
 
   .weather-form input:focus {
@@ -63,10 +69,11 @@
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 600;
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(0,128,128,0.2);
+    white-space: nowrap;
   }
 
   .weather-form button:hover {
@@ -84,9 +91,16 @@
     box-shadow: none;
   }
 
-  /* --- Output Box Styling --- */
+  /* --- Error Message --- */
+  #error-message {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  /* --- Output Box --- */
   #OutPut-data {
-    display: none; /* Hidden by default */
+    display: none;
     width: 100%;
     box-sizing: border-box;
     padding: 2rem;
@@ -111,7 +125,7 @@
   }
 
   .alert-title {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: teal;
     margin-top: 0;
@@ -122,7 +136,7 @@
   }
 
   .alert-list {
-    list-style-type: none; /* Remove default bullets */
+    list-style-type: none;
     padding-left: 0;
     margin: 0;
   }
@@ -131,11 +145,10 @@
     position: relative;
     padding-left: 20px;
     margin-bottom: 8px;
-    font-size: 1.05rem;
-    line-height: 1.5;
+    font-size: 1rem;
+    line-height: 1.6;
   }
 
-  /* Custom Bullet Point */
   .alert-list li::before {
     content: "•";
     color: teal;
@@ -151,43 +164,100 @@
     border: 3px solid #f3f3f3;
     border-top: 3px solid teal;
     border-radius: 50%;
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     animation: spin 1s linear infinite;
-    margin: 10px auto;
+    margin: 20px auto;
   }
 
-  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* Mobile */
+  /* === Responsive === */
+
+  /* Tablets */
+  @media (max-width: 768px) {
+    .community-head .text {
+      font-size: 2rem;
+    }
+    .heading-subtitle {
+      font-size: 1.05rem;
+      margin-bottom: 1.8rem;
+    }
+    #OutPut-data {
+      padding: 1.5rem 1.2rem;
+    }
+    .alert-title {
+      font-size: 1.15rem;
+    }
+  }
+
+  /* Mobile — stack form vertically */
   @media (max-width: 600px) {
+    .weather-section {
+      margin: 2rem auto;
+    }
+    .community-head .text {
+      font-size: 1.75rem;
+    }
+    .heading-subtitle {
+      font-size: 0.95rem;
+    }
     .weather-form {
       flex-direction: column;
       gap: 10px;
     }
-    .weather-form input, .weather-form button {
+    .weather-form input,
+    .weather-form button {
       width: 100%;
+      min-width: unset;
+      border-radius: 14px;
+    }
+    #OutPut-data {
+      padding: 1.2rem 1rem;
+      border-radius: 14px;
+    }
+    .alert-section {
+      margin-bottom: 1.2rem;
+      padding-bottom: 1.2rem;
+    }
+    .alert-title {
+      font-size: 1.05rem;
+    }
+    .alert-list li {
+      font-size: 0.95rem;
+    }
+  }
+
+  /* Small phones */
+  @media (max-width: 380px) {
+    .community-head .text {
+      font-size: 1.5rem;
+    }
+    .weather-form input,
+    .weather-form button {
+      padding: 14px 18px;
+      font-size: 0.95rem;
     }
   }
 </style>
 
 <section class="weather-section">
-  
+
   <div class="community-head">
     <div class="text">Weather Alert System</div>
   </div>
 
   <h3 class="heading-subtitle">Enter your city to get real-time agricultural precautions</h3>
-  
+
   <form class="weather-form" id="weather-form">
     <input name="city" id="cityInput" placeholder="Enter City (e.g., London, Mumbai)" required autocomplete="off" />
     <button type="submit" id="submitBtn">Get Report</button>
   </form>
 
-  <div id="error-message" style="display:none; color: #d32f2f; text-align: center; margin-bottom: 20px; font-weight: bold;"></div>
+  <div id="error-message" style="display:none; color: #d32f2f; font-weight: bold;"></div>
 
   <div id="OutPut-data">
-    
+
     <div class="alert-section">
       <div class="alert-title">🌡️ Temperature Analysis</div>
       <p id="tempAlert" style="font-weight: 600; margin-bottom: 5px;"></p>
@@ -220,26 +290,19 @@
 
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
-
     if (isSubmitting) return;
+
     const city = cityInput.value.trim();
     if (!city) return;
 
-    // 1. Lock Interface & Show Loading
     isSubmitting = true;
     cityInput.disabled = true;
     submitBtn.disabled = true;
     const originalBtnText = submitBtn.innerText;
     submitBtn.innerText = "Scanning...";
-    
-    // Hide previous results/errors
+
     errorDiv.style.display = "none";
-    outputDiv.style.display = "none"; 
-    
-    // Optional: You could show a loader div here, but "Scanning..." on button is often enough. 
-    // If you want a loader box, uncomment below:
-    // outputDiv.innerHTML = '<div class="loader"></div>'; 
-    // outputDiv.style.display = "block";
+    outputDiv.style.display = "none";
 
     try {
       const response = await fetch("/alert", {
@@ -250,15 +313,11 @@
 
       const result = await response.json();
 
-      // Check for Backend Logic Errors (like "City not found")
-      if (result.error) {
-        throw new Error(result.error);
-      }
+      if (result.error) throw new Error(result.error);
 
-      // Helper to render lists
       const renderList = (elementId, items) => {
         const listEl = document.getElementById(elementId);
-        listEl.innerHTML = ""; 
+        listEl.innerHTML = "";
         if (items && items.length > 0) {
           items.forEach(item => {
             const li = document.createElement("li");
@@ -268,8 +327,6 @@
         }
       };
 
-      // 2. Populate Data
-      // Re-show the container in case we hid it or overwrote it with a loader
       outputDiv.style.display = "block";
 
       document.getElementById("tempAlert").innerText = result.tempAlert || "";
@@ -281,12 +338,13 @@
       document.getElementById("rainAlert").innerText = result.rainAlert || "";
       renderList("rainMsg", result.rainMsg);
 
+      outputDiv.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
     } catch (error) {
       console.error("Error:", error);
       errorDiv.innerText = error.message || "An error occurred. Please try again.";
       errorDiv.style.display = "block";
     } finally {
-      // 3. Unlock Interface
       isSubmitting = false;
       cityInput.disabled = false;
       submitBtn.disabled = false;

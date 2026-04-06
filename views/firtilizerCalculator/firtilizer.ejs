@@ -25,18 +25,18 @@
   .heading-subtitle {
     text-align: center;
     color: #556b7a;
-    font-size: 400 1.15rem/1.6rem;
+    font-size: 1.15rem;
+    line-height: 1.6;
     max-width: 660px;
     margin-bottom: 3rem;
   }
 
-  /* === Main Card – Bigger & More Premium === */
+  /* === Main Card === */
   .calc-form {
     width: 100%;
     max-width: 1100px;
     background: #ffffff;
-    padding: 3.2rem 3.8rem;
-    padding-right: 980px; /* space for decorative strip + button */
+    padding: 3.2rem 3.8rem 3.2rem 3.8rem;
     border-radius: 28px;
     box-shadow: 0 24px 60px rgba(10, 50, 45, 0.09);
     border: 1px solid rgba(180, 230, 220, 0.4);
@@ -45,18 +45,18 @@
     box-sizing: border-box;
   }
 
-  /* Decorative Right Strip – Enhanced Gradient */
+  /* Decorative Right Strip */
   .right-strip {
     position: absolute;
     top: 0;
     right: 0;
-    width: 360px;
+    width: 300px;
     height: 100%;
-    background: linear-gradient(90deg, 
-      rgba(220, 250, 242, 0.96) 0%, 
-      rgba(230, 255 245, 0.78) 60%, 
+    background: linear-gradient(90deg,
+      rgba(220, 250, 242, 0.96) 0%,
+      rgba(230, 255, 245, 0.78) 60%,
       rgba(240, 255, 250, 0.5) 100%);
-    border-radius: 28px 28px 28px 28px;
+    border-radius: 0 28px 28px 0;
     box-shadow: -12px 0 40px rgba(10, 80, 70, 0.08);
     pointer-events: none;
     z-index: 0;
@@ -105,6 +105,7 @@
     border-radius: 16px;
     transition: all 0.25s ease;
     color: #1a3c40;
+    box-sizing: border-box;
   }
 
   .form-group input:focus {
@@ -119,30 +120,33 @@
     color: #94b2b0;
   }
 
-  /* Floating Button – Bigger & Bolder */
+  /* Submit Button — inline below form grid on all sizes */
+  .btn-wrapper {
+    position: relative;
+    z-index: 1;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
   .recommenBtn {
-    position: absolute;
-    right: 40px;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 20px 42px;
+    padding: 18px 52px;
     background: linear-gradient(135deg, #028f86, #00b3a6);
     color: white;
     border: none;
     border-radius: 20px;
-    font-size: 1.22rem;
+    font-size: 1.18rem;
     font-weight: 800;
     letter-spacing: 0.6px;
     cursor: pointer;
     box-shadow: 0 12px 32px rgba(2, 143, 134, 0.3);
     transition: all 0.3s ease;
-    z-index: 10;
-    min-width: 300px;
-    text-align: center;
+    width: 100%;
+    max-width: 400px;
   }
 
   .recommenBtn:hover {
-    transform: translateY(-54%);
+    transform: translateY(-3px);
     box-shadow: 0 18px 40px rgba(2, 143, 134, 0.4);
     background: linear-gradient(135deg, #00756f, #00998e);
   }
@@ -157,6 +161,7 @@
   /* Results Section */
   #result-div {
     display: none;
+    width: 100%;
     margin-top: 3.5rem;
     animation: fadeIn 0.6s ease-out;
   }
@@ -220,35 +225,86 @@
   @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
   /* === Responsive === */
+
+  /* Large tablets */
   @media (max-width: 992px) {
-    .calc-form { padding-right: 3rem; padding-left: 3rem; }
-    .right-strip { width: 300px; }
-    .recommenBtn { min-width: 220px; padding: 18px 36px; }
+    .calc-form {
+      padding: 2.8rem 2.5rem;
+    }
+    .right-strip {
+      width: 200px;
+    }
+    .community-head .text {
+      font-size: 2.2rem;
+    }
   }
 
-  @media (max-width: 880px) {
-    .right-strip { display: none; }
-    .calc-form {
-      padding: 2.5rem 2.2rem !important;
-      padding-right: 2.2rem !important;
+  /* Tablets — hide strip, single column */
+  @media (max-width: 768px) {
+    .right-strip {
+      display: none;
     }
-    .form-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .calc-form {
+      padding: 2.2rem 1.8rem;
+      border-radius: 20px;
+    }
+    .form-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
     .recommenBtn {
-      position: static;
-      transform: none;
-      width: 100%;
-      margin: 1.5rem auto 0;
-      padding: 18px;
+      max-width: 100%;
+      font-size: 1.1rem;
+      padding: 16px 32px;
+    }
+    .results-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+    .results-header {
+      font-size: 1.5rem;
+    }
+    .community-head .text {
+      font-size: 2rem;
+    }
+    .heading-subtitle {
+      font-size: 1.05rem;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .fertilizer-section {
+      margin: 2rem auto;
+    }
+    .community-head .text {
+      font-size: 1.75rem;
+    }
+    .heading-subtitle {
+      font-size: 0.95rem;
+      margin-bottom: 1.8rem;
+    }
+    .calc-form {
+      padding: 1.8rem 1.2rem;
       border-radius: 16px;
     }
-    .results-grid { grid-template-columns: 1fr; }
-    .community-head .text { font-size: 2.1rem; }
-  }
-
-  @media (max-width: 480px) {
-    .community-head .text { font-size: 1.9rem; }
-    .heading-subtitle { font-size: 1rem; }
-    .calc-form { padding: 2rem 1.5rem; border-radius: 20px; }
+    .section-title {
+      font-size: 1.15rem;
+    }
+    .form-group input {
+      padding: 14px 16px;
+      font-size: 1rem;
+    }
+    .results-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .res-value {
+      font-size: 2.2rem;
+    }
+    .result-card {
+      padding: 1.6rem 1.2rem;
+    }
   }
 </style>
 
@@ -264,7 +320,7 @@
     <div class="form-grid">
       <!-- Left Column -->
       <div>
-        <div class="section-title">Plant Details</div>
+        <div class="section-title">🌱 Plant Details</div>
 
         <div class="form-group">
           <label for="plant">Plant Name *</label>
@@ -284,7 +340,7 @@
 
       <!-- Right Column -->
       <div>
-        <div class="section-title">Soil Analysis (Optional)</div>
+        <div class="section-title">🧪 Soil Analysis (Optional)</div>
 
         <div class="form-group">
           <label for="soilN">Nitrogen (N) – Current level</label>
@@ -303,12 +359,15 @@
       </div>
     </div>
 
-    <button type="submit" class="recommenBtn">Calculate Recommendation</button>
+    <!-- Button always below the grid, centered -->
+    <div class="btn-wrapper">
+      <button type="submit" class="recommenBtn">Calculate Recommendation</button>
+    </div>
   </form>
 
-  <div id="error-message" style="display:none; color: #d32f2f; margin-top: 1.5rem; font-weight: 700; background: #ffebee; padding: 14px 20px; border-radius: 12px; text-align: center;"></div>
+  <div id="error-message" style="display:none; color: #d32f2f; margin-top: 1.5rem; font-weight: 700; background: #ffebee; padding: 14px 20px; border-radius: 12px; text-align: center; width: 100%;"></div>
 
-  <div id="loading" style="display:none;">
+  <div id="loading" style="display:none; width: 100%;">
     <div class="loader" role="status"></div>
     <p style="text-align:center; color:#0a6d66; margin-top:12px;">Analyzing your crop data...</p>
   </div>
@@ -332,7 +391,6 @@
   </div>
 </section>
 
-<!-- Your existing script remains unchanged -->
 <script>
   const form = document.getElementById("fertilizerForm");
   const resultDiv = document.getElementById("result-div");
