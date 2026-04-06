@@ -656,30 +656,180 @@ body.dark .label-text{
   margin: 1rem;
 }
 
-/* Tablet & Mobile Screens */
+/* =============================================
+   MOBILE SIDEBAR OVERLAY SYSTEM
+   ============================================= */
+
+/* Floating hamburger button (mobile only) */
+.sidebar-mobile-toggle {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1100;
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  width: 42px;
+  height: 42px;
+  font-size: 22px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* Dark backdrop when sidebar is open on mobile */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 999;
+}
+
+.sidebar-overlay.active {
+  display: block;
+}
+
+/* Sidebar slides in on mobile when .mobile-open is added */
+.sidebar.mobile-open {
+  left: 0 !important;
+}
+
+/* =============================================
+   FOOTER RESPONSIVE
+   ============================================= */
+.footer-copyright,
+.footer-logo,
+.footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-links {
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+/* =============================================
+   TABLET (max-width: 900px)
+   ============================================= */
 @media screen and (max-width: 900px) {
-  /* Hide sidebar by default on mobile or keep it collapsed */
+  /* Hide sidebar off-screen; shown via JS overlay */
   .sidebar {
-    left: -250px; 
+    left: -250px;
     z-index: 1000;
+    transition: var(--tran-03);
   }
-  /* Make main content take full width */
-  .home, .sidebar.close ~ .home {
+
+  /* Show the floating hamburger */
+  .sidebar-mobile-toggle {
+    display: flex;
+  }
+
+  /* Main content takes full width */
+  .home,
+  .sidebar.close ~ .home {
     left: 0;
     width: 100%;
   }
-  /* Fix massive margins on new post form */
-  .new-post {
-    margin: 1rem 2rem;
+
+  /* Padding so content doesn't sit under hamburger button */
+  .home .text {
+    padding: 20px 20px 20px 60px;
   }
-  /* Make images responsive */
+
+  /* New post form margins */
+  .new-post {
+    margin: 1rem 1rem;
+  }
+
+  /* Responsive card images */
   .card-img-top {
     width: 100%;
     height: auto !important;
     margin-bottom: 1rem;
+    margin-right: 0;
   }
-  /* Stack list items */
+
+  /* Stack card listing */
   .listing-link {
     flex-direction: column;
+  }
+
+  /* Community head wrap */
+  .home .community-head {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0 1rem;
+  }
+
+  .community-head .create-post {
+    margin-right: 0.5rem;
+    font-size: 20px;
+  }
+
+  /* Card body full width */
+  .card-body {
+    margin: 0.5rem;
+  }
+
+  /* Comment section */
+  .comment {
+    margin: 0 0.5rem;
+  }
+}
+
+/* =============================================
+   MOBILE (max-width: 600px)
+   ============================================= */
+@media screen and (max-width: 600px) {
+  .home .text {
+    font-size: 22px;
+    padding: 16px 16px 16px 56px;
+  }
+
+  .card {
+    margin: 0.5rem;
+  }
+
+  .card-body .card-title {
+    font-size: 22px;
+  }
+
+  .user-details .userName {
+    font-size: 16px;
+  }
+
+  .card-content .react-btns {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* Footer stacks vertically */
+  .footer-row {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  .footer-links {
+    justify-content: center;
+  }
+
+  /* New post form */
+  .new-post {
+    margin: 0.5rem;
+  }
+
+  .add-btn {
+    position: relative;
+    right: auto;
+    margin: 0.5rem auto;
+    display: block;
+    width: 100%;
   }
 }

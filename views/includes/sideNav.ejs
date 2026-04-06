@@ -1,16 +1,22 @@
-<nav class="sidebar">
+<!-- Mobile overlay backdrop -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- Mobile open button -->
+<button class="sidebar-mobile-toggle d-md-none" id="sidebarOpenBtn" aria-label="Open menu">
+  <i class="bx bx-menu"></i>
+</button>
+
+<nav class="sidebar" id="sidebar">
   <header>
     <div class="image-text">
       <span class="Logoimage">
-        <img src="images/mainLogo.jpeg" alt=" ">
+        <img src="images/mainLogo.jpeg" alt="AgriAI Logo">
       </span>
-
       <div class="text header-text">
         <span class="name" style="font-size: 22px; color: teal; margin-left: 1rem;">AgriAI</span>
-      </div> 
+      </div>
     </div>
-
-    <i class="bx bxs-chevron-right toggle"></i>
+    <i class="bx bxs-chevron-right toggle" id="sidebarToggle"></i>
   </header>
 
   <div class="menu-bar">
@@ -49,7 +55,7 @@
             <i class="fa-solid fa-circle-exclamation icon"></i>
             <span class="text nav-text">Weather Alerts</span>
           </a>
-        </li> 
+        </li>
         <li class="nav-link">
           <a href="/gemini">
             <i class="fa-solid fa-robot icon"></i>
@@ -69,15 +75,15 @@
       <li class="">
         <% if(!currentUser){ %>
           <a href="/login">
-          <i class="bx bx-log-in icon"></i>
-          <span class="text nav-text">Login</span>
-        </a>
-          <%}else{%>
-        <a href="/logout">
-          <i class="bx bx-log-out icon"></i>
-          <span class="text nav-text" onclick="return confirmLogout(event)">Logout</span>
-        </a>
-        <%}%>
+            <i class="bx bx-log-in icon"></i>
+            <span class="text nav-text">Login</span>
+          </a>
+        <% } else { %>
+          <a href="/logout" onclick="return confirmLogout(event)">
+            <i class="bx bx-log-out icon"></i>
+            <span class="text nav-text">Logout</span>
+          </a>
+        <% } %>
       </li>
 
       <li class="mode">
@@ -85,29 +91,42 @@
           <i class="bx bx-moon icon moon"></i>
           <i class="bx bx-sun icon sun"></i>
         </div>
-
         <span class="mode-text text">Dark Mode</span>
         <div class="toggle-switch">
-            <span class="switch"></span>
+          <span class="switch"></span>
         </div>
       </li>
     </div>
-  </div> 
+  </div>
 </nav>
 
 <script>
-  // JavaScript function to handle logout confirmation
   function confirmLogout(event) {
-    // Prevent default navigation
     event.preventDefault();
-
-    // Show confirmation dialog
     const userConfirmed = confirm("Do you really want to log out?");
-    
-    // If user confirmed, navigate to the logout route
     if (userConfirmed) {
       window.location.href = "/logout";
     }
   }
+
+  // Mobile sidebar open/close via overlay
+  const sidebarOpenBtn = document.getElementById("sidebarOpenBtn");
+  const sidebarOverlay = document.getElementById("sidebarOverlay");
+  const sidebar = document.getElementById("sidebar");
+
+  function openSidebar() {
+    sidebar.classList.add("mobile-open");
+    sidebarOverlay.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeSidebar() {
+    sidebar.classList.remove("mobile-open");
+    sidebarOverlay.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  if (sidebarOpenBtn) sidebarOpenBtn.addEventListener("click", openSidebar);
+  if (sidebarOverlay) sidebarOverlay.addEventListener("click", closeSidebar);
 </script>
-    <script src="/JS/script.js"></script>
+<script src="/JS/script.js"></script>

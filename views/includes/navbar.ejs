@@ -1,6 +1,26 @@
-<nav class="navbar navbar-expand-md">
-  <div class="container-fluid mx-5">
+<nav class="navbar navbar-expand-md sticky-top">
+  <div class="container-fluid px-3 px-md-5">
     <a class="navbar-brand" href="/"><img class="main-logo" src="images/mainLogo.jpeg"></a>
+
+    <!-- Auth icon visible on mobile next to toggler -->
+    <div class="d-flex align-items-center d-md-none me-2">
+      <% if(!currentUser) { %>
+        <a class="navbar-brand mb-0" href="/login">Log in</a>
+      <% } %>
+      <% if(currentUser) { %>
+        <div class="nav-item dropdown">
+          <a class="nav-link p-0" href="/profile" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-circle-user fa-xl" style="color: black;"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Give Feedback</a></li>
+            <li><a class="dropdown-item" href="/logout" onclick="return confirmLogout(event)">Log out</a></li>
+          </ul>
+        </div>
+      <% } %>
+    </div>
+
     <button
       class="navbar-toggler"
       type="button"
@@ -12,55 +32,41 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse nav-links" id="navbarNavDropdown">
-      <a class="nav-link active" aria-current="page" href="<%= detectionAppUrl %>"
-        >Disease Detection</a
-      >
 
+    <div class="collapse navbar-collapse nav-links" id="navbarNavDropdown">
+      <a class="nav-link active" aria-current="page" href="<%= detectionAppUrl %>">Disease Detection</a>
       <a class="nav-link active" href="/community">Community</a>
       <a class="nav-link active" href="/gemini">Chatbot</a>
       <a class="nav-link active" href="/fertilizer">Fertilizer</a>
       <a class="nav-link active" href="/alert">Alerts</a>
-      <!-- <a class="nav-link active" href="#">About Us</a> -->
-      
     </div>
- 
-    <div style="margin-right: 4rem; margin-left: -2rem;">
+
+    <!-- Auth icon — desktop only -->
+    <div class="d-none d-md-flex align-items-center ms-auto me-4">
       <% if(!currentUser) { %>
-      <a class="navbar-brand" href="/login">Log in</a>
-      <% } %> <% if(currentUser) { %>
-        <div class="nav-item dropdown"> 
-        <a
-          class="nav-link"
-          href="/profile"
-          role="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-          
-        >
-          <i class="fa-solid fa-circle-user fa-xl"  style="color: black;"></i>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Settings</a></li>
-          <li><a class="dropdown-item" href="#">Give Feedback</a></li>
-          <li><a class="dropdown-item" href="/logout" onclick="return confirmLogout(event)">Log out</a></li>
-        </ul>
-      </div>
+        <a class="navbar-brand mb-0" href="/login">Log in</a>
+      <% } %>
+      <% if(currentUser) { %>
+        <div class="nav-item dropdown">
+          <a class="nav-link" href="/profile" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-circle-user fa-xl" style="color: black;"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Give Feedback</a></li>
+            <li><a class="dropdown-item" href="/logout" onclick="return confirmLogout(event)">Log out</a></li>
+          </ul>
+        </div>
       <% } %>
     </div>
+
   </div>
 </nav>
 
 <script>
-  // JavaScript function to handle logout confirmation
   function confirmLogout(event) {
-    // Prevent default navigation
     event.preventDefault();
-
-    // Show confirmation dialog
     const userConfirmed = confirm("Do you really want to log out?");
-    
-    // If user confirmed, navigate to the logout route
     if (userConfirmed) {
       window.location.href = "/logout";
     }
