@@ -274,10 +274,44 @@ body {
     width: 100%;
     margin-top: 2rem;
   }
+  .hero {
+    margin-top: 10rem;
+    flex-direction: column;
+    text-align: center;
+  }
+  .leaf-img {
+    margin: 0 auto;
+    width: 80%;
+  }
+  .welcome-Mgs {
+    font-size: 40px !important;
+  }
 }
 
 @media screen and (max-width: 768px) {
-  .hero, .steps, .outer-of-feature {
+  .navbar {
+    height: auto;
+    padding-bottom: 1rem;
+  }
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav-link {
+    margin-right: 0;
+    font-size: 16px;
+  }
+  .hero {
+    margin: 6rem 1rem 2rem 1rem;
+  }
+  .welcome-Mgs {
+    font-size: 32px !important;
+  }
+  .title-part {
+    padding: 0;
+  }
+  .steps, .outer-of-feature {
     flex-direction: column;
     margin: 2rem 1rem;
     text-align: center;
@@ -285,10 +319,6 @@ body {
   .arrow-img {
     transform: rotate(90deg); /* Point arrow down */
     margin: 1rem auto !important;
-  }
-  .nav-links {
-    flex-direction: column;
-    display: none; /* Can be toggled with JavaScript for a hamburger menu */
   }
   .leaf-img {
     width: 100%;
